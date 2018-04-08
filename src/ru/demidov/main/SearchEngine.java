@@ -12,14 +12,18 @@ public class SearchEngine {
     }
 
     public void processFolders(File folder) {
-        File[] folderContent = folder.listFiles();
+        try {
+            File[] folderContent = folder.listFiles();
 
-        for (File entry : folderContent) {
-            if (entry.isDirectory()) {
-                processFolders(entry);
-                continue;
+            for (File entry : folderContent) {
+                if (entry.isDirectory()) {
+                    processFolders(entry);
+                    continue;
+                }
+                processFiles(entry);
             }
-            processFiles(entry);
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
         }
     }
 
@@ -34,7 +38,7 @@ public class SearchEngine {
     }
 
     private void processFiles(File file) {
-        if (file.getName().indexOf(".txt") == -1) {
+        if (!file.getName().contains(".txt")) {
             return;
         }
         textFiles.put(file.getName(), getFileContent(file));
@@ -55,7 +59,7 @@ public class SearchEngine {
 
         } catch(IOException ex) {
             ex.printStackTrace();
-            return new String();
+            return "";
         }
     }
 }
