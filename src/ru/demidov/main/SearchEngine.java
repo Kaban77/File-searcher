@@ -5,11 +5,7 @@ import java.util.TreeMap;
 
 public class SearchEngine {
 
-    private TreeMap<String, String> textFiles;
-
-    public SearchEngine() {
-        textFiles = new TreeMap<String, String>();
-    }
+    private TreeMap<String, String> textFiles = new TreeMap<String, String>();
 
     public void processFolders(File folder) {
         try {
